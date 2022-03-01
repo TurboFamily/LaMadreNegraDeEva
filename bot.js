@@ -107,11 +107,10 @@ bot.on('voiceStateUpdate', (oldMember, newMember) => {
   let newUserChannel = newMember.channelID;
   let oldUserChannel = oldMember.channelID;
 
-  if(newUserChannel === "156502105379700740") //don't remove ""
+  if(newUserChannel === "156502105379700740" && newMember.id === "180956256880689152") //don't remove ""
   {
-    console.log(oldMember);
-    console.log(newMember);
     playAudio();
+    console.log(newMember);
   }
   else{
     // User leaves a voice channel
