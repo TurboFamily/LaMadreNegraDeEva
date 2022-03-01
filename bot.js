@@ -98,6 +98,9 @@ bot.on('voiceStateUpdate', (oldMember, newMember) => {
   if(newUserChannel === "156502105379700740" && newMember.id === "180956256880689152") //don't remove ""
   {
     playAudio();
+    console.log("Antes");
+    console.log(oldMember);
+    console.log("Ahora");
     console.log(newMember);
   }
   else{
@@ -162,7 +165,7 @@ bot.on('message', async msg => {
   }
 
   if (command == 'stop') {
-    await msg.reply('Powering off...');
+    await msg.reply('Ya me voy ya...');
     fileData = "Now Playing: Nothing";
     await fs.writeFile("now-playing.txt", fileData, (err) => { 
     if (err) 
@@ -170,12 +173,12 @@ bot.on('message', async msg => {
     }); 
     const statusEmbed = new Discord.MessageEmbed()
     .setAuthor(`${bot.user.username}`, bot.user.avatarURL())
-    .setDescription(`${bot.user.username} se va A LA CAMA...`)
+    .setDescription(`${bot.user.username} se va A LA CAMA!`)
     .setColor('#0066ff')
     let statusChannel = bot.channels.cache.get(config.statusChannel);
     if (!statusChannel) return console.error('The status channel does not exist! Skipping.');
     await statusChannel.send(statusEmbed);
-    console.log('Powering off...');
+    console.log('Ya me voy ya...');
     dispatcher.destroy();
     bot.destroy();
     process.exit(0);
