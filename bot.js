@@ -74,7 +74,8 @@ bot.on('ready', () => {
 
   bot.user.setPresence({
     activity: {
-      name: `a`
+      name: `SEVENTEEN (세븐틴) 'Left & Right'`,
+      type: 'LISTENING'
     },
     status: 'online',
   }).then(presence => console.log(`Activity set to "${presence.activities[0].name}"`)).catch(console.error);
@@ -121,9 +122,9 @@ bot.on('message', async msg => {
 
   // Public allowed commands
 
-  // if (command == 'about') {
-  //   msg.channel.send('The bot code was created by Andrew Lee (Alee#4277). Written in Discord.JS and licensed with GPL-3.0.');
-  // }
+  if (command == '') {
+    playAudio();
+  }
 
   if (![config.botOwner].includes(msg.author.id)) return;
 
