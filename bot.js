@@ -97,15 +97,18 @@ bot.on('voiceStateUpdate', (oldMember, newMember) => {
 
   if(newUserChannel === "156502105379700740" && newMember.id === "180956256880689152") //don't remove ""
   {
+    if(newMember.serverDeaf === oldMember.serverDeaf &&
+        newMember.serverMute === oldMember.serverMute &&
+        newMember.selfDeaf === oldMember.selfDeaf &&
+        newMember.selfMute === oldMember.selfMute &&
+        newMember.selfVideo === oldMember.selfVideo &&
+        newMember.streaming === oldMember.streaming
+    ){
     playAudio();
-    console.log("Antes");
-    console.log(oldMember);
-    console.log("Ahora");
-    console.log(newMember);
+    }
   }
   else{
     // User leaves a voice channel
-    console.log("Left vc");
   }
 });
 
