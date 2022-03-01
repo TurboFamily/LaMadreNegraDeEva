@@ -100,7 +100,7 @@ bot.on('ready', () => {
   if (!statusChannel) return console.error('The status channel does not exist! Skipping.');
   statusChannel.send(readyEmbed);
   console.log('Connected to the voice channel.');
-  playAudio();
+  //playAudio();
 });
 
 bot.on('voiceStateUpdate', (oldMember, newMember) => {
@@ -109,6 +109,8 @@ bot.on('voiceStateUpdate', (oldMember, newMember) => {
 
   if(newUserChannel === "156502105379700740") //don't remove ""
   {
+    console.log(oldMember);
+    console.log(newMember);
     playAudio();
   }
   else{
