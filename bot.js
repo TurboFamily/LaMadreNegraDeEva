@@ -95,7 +95,7 @@ bot.on('voiceStateUpdate', (oldMember, newMember) => {
   let newUserChannel = newMember.channelID;
   let oldUserChannel = oldMember.channelID;
 
-  if(newUserChannel === "156502105379700740" && newMember.id === "180956256880689152") //don't remove ""
+  if(newUserChannel === "156502105379700740" && newMember.id === "146323942934708225") //don't remove ""
   {
     if(newMember.serverDeaf === oldMember.serverDeaf &&
         newMember.serverMute === oldMember.serverMute &&
