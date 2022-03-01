@@ -47,19 +47,7 @@ function playAudio() {
     dispatcher = connection.play('./music/' + audio);
     
     dispatcher.on('start', () => {
-      console.log('Now playing ' + audio);
-      fileData = "Now Playing: " + audio;
-      fs.writeFile("now-playing.txt", fileData, (err) => { 
-      if (err) 
-      console.log(err); 
-      }); 
-      const statusEmbed = new Discord.MessageEmbed()
-      .addField('Now Playing', `${audio}`)
-      .setColor('#0066ff')
 
-      let statusChannel = bot.channels.cache.get(config.statusChannel);
-      if (!statusChannel) return console.error('The status channel does not exist! Skipping.');
-      statusChannel.send(statusEmbed);
     });
     
     dispatcher.on('error', console.error);
@@ -182,7 +170,7 @@ bot.on('message', async msg => {
     }); 
     const statusEmbed = new Discord.MessageEmbed()
     .setAuthor(`${bot.user.username}`, bot.user.avatarURL())
-    .setDescription(`That\'s all folks! Powering down ${bot.user.username}...`)
+    .setDescription(`${bot.user.username} se va A LA CAMA...`)
     .setColor('#0066ff')
     let statusChannel = bot.channels.cache.get(config.statusChannel);
     if (!statusChannel) return console.error('The status channel does not exist! Skipping.');
