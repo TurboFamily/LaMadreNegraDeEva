@@ -65,8 +65,9 @@ function playAudio() {
     dispatcher.on('error', console.error);
 
     dispatcher.on('finish', () => {
-      console.log('Music has finished playing.');
-      playAudio();
+      voiceChannel = bot.channels.cache.get(config.voiceChannel);
+      dispatcher.destroy();
+      voiceChannel.leave();
     });
     
   }).catch(e => {
@@ -85,14 +86,14 @@ bot.on('ready', () => {
 
   bot.user.setPresence({
     activity: {
-      name: `Music | ${config.prefix}help`
+      name: `a`
     },
     status: 'online',
   }).then(presence => console.log(`Activity set to "${presence.activities[0].name}"`)).catch(console.error);
 
   const readyEmbed = new Discord.MessageEmbed()
   .setAuthor(`${bot.user.username}`, bot.user.avatarURL())
-  .setDescription('Starting bot...')
+  .setDescription('La madre negra de Eva ha despertado...')
   .setColor('#0066ff')
 
   let statusChannel = bot.channels.cache.get(config.statusChannel);
@@ -100,6 +101,20 @@ bot.on('ready', () => {
   statusChannel.send(readyEmbed);
   console.log('Connected to the voice channel.');
   playAudio();
+});
+
+bot.on('voiceStateUpdate', (oldMember, newMember) => {
+  let newUserChannel = newMember.channelID;
+  let oldUserChannel = oldMember.channelID;
+
+  if(newUserChannel === "156502105379700740") //don't remove ""
+  {
+    playAudio();
+  }
+  else{
+    // User leaves a voice channel
+    console.log("Left vc");
+  }
 });
 
 bot.on('message', async msg => {
@@ -111,34 +126,9 @@ bot.on('message', async msg => {
 
   // Public allowed commands
 
-  if (command == 'help') {
-    if (!msg.guild.member(bot.user).hasPermission('EMBED_LINKS')) return msg.reply('**ERROR: This bot doesn\'t have the permission to send embed links please enable them to use the full help.**');
-    const helpEmbed = new Discord.MessageEmbed()
-    .setAuthor(`${bot.user.username} Help`, bot.user.avatarURL())
-    .setDescription(`Currently playing \`${audio}\`.`)
-    .addField('Public Commands', `${config.prefix}help\n${config.prefix}ping\n${config.prefix}git\n${config.prefix}playing\n${config.prefix}about\n`, true)
-    .addField('Bot Owner Only', `${config.prefix}join\n${config.prefix}resume\n${config.prefix}pause\n${config.prefix}skip\n${config.prefix}leave\n${config.prefix}stop\n`, true)
-    .setFooter('© Copyright 2020 Andrew Lee. Licensed with GPL-3.0.')
-    .setColor('#0066ff')
-
-    msg.channel.send(helpEmbed);
-  }
-
-  if (command == 'ping') {
-    msg.reply('Pong!');
-  }
-
-  if (command == 'git') {
-    msg.reply('This is the source code of this project.\nhttps://github.com/Alee14/DLMP3');
-  }
-
-  if (command == 'playing') {
-    msg.channel.send('Currently playing `' + audio + '`.');
-  }
-  
-  if (command == 'about') {
-    msg.channel.send('The bot code was created by Andrew Lee (Alee#4277). Written in Discord.JS and licensed with GPL-3.0.');
-  }
+  // if (command == 'about') {
+  //   msg.channel.send('The bot code was created by Andrew Lee (Alee#4277). Written in Discord.JS and licensed with GPL-3.0.');
+  // }
 
   if (![config.botOwner].includes(msg.author.id)) return;
 
