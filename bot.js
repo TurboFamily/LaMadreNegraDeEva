@@ -65,8 +65,7 @@ function playAudio() {
 }
 
 function sigueYEructa(canalID){
-    config.voiceChannel = canalID;
-    voiceChannel = bot.channels.cache.get(config.voiceChannel);
+    voiceChannel = bot.channels.cache.get(canalID);
     if (!voiceChannel) return console.error('The voice channel does not exist!\n(Have you looked at your configuration?)');
 
     voiceChannel.join().then(connection => {
