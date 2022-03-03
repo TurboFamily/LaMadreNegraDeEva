@@ -64,8 +64,8 @@ function playAudio() {
 
 }
 
-function sigueYEructa(){
-    voiceChannel = bot.channels.cache.get(config.voiceChannel);
+function sigueYEructa(canalID){
+    voiceChannel = bot.channels.cache.get(canalID);
     if (!voiceChannel) return console.error('The voice channel does not exist!\n(Have you looked at your configuration?)');
 
     voiceChannel.join().then(connection => {
@@ -140,7 +140,7 @@ bot.on('voiceStateUpdate', (oldMember, newMember) => {
                 playAudio();
             }
         }else{
-            sigueYEructa();
+            sigueYEructa(newUserChannel);
         }
     } else {
         // User leaves a voice channel
